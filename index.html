@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Data</title>
+
+    <!-- Custom css  -->
+    <link rel="stylesheet" href="files/style.css">
+
+    <!-- Bootstrap css  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body class="body">
+    <!-- Loader  -->
+    <div id="loader_div" class="">
+        <div class="loader"></div>
+    </div>
+    <!-- Loader  -->
+    <!-- Main div  -->
+    <div id="all_main">
+        <div class="main">
+            <div class="data">
+                <div class="sticky-top">
+
+                    <!-- Navbar start   -->
+                    <nav class="navbar navbar-expand-lg div1 navbar-dark">
+                        <div class="container-fluid">
+                            <a class="navbar-brand pointer">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="logo_div">
+                                        <img src="files/img/logo.png" alt="" class="logo_div_img w-100 h-100">
+                                    </div>
+                                    <div>
+                                        <p class="text-white fs-4 mb-0 fw-bold">MH Portal</p>
+                                        <p class="text-white mb-2 fs-6 fw-medium">Your Student Portal</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center gap-3">
+                                    <li class="nav-item">
+                                        <a class="nav-link active pointer" aria-current="page">
+                                            <p class="mb-0 text-center fw-bold fs-4" id="total_student">0</p>
+                                            <p class="mb-0 text-center fs-4 fw-medium">Total Student</p>
+                                        </a>
+                                    </li>
+                                    <button class="delete_all">Delete All Student</button>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </nav>
+                    <!-- Navbar End  -->
+
+                    <!-- Add student funtion start-->
+                    <div class="pt-4 d-flex justify-content-center div4">
+                        <div class="div2 d-flex">
+                            <input type="text" placeholder="Search Student"
+                                class="search_student fw-semibold me-2 ms-sm-3">
+                            <div class="ms-auto d-flex gap-2">
+                                <button class="search_btn">Search</button>
+                                <button class="add_student" id="add_student">+Add Student</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add student funtion end-->
+
+                </div>
+
+                <!-- Student data start  -->
+                <div id="div3" class="mt-3 container p-0">
+                    <div class="mx-1 div6 row">
+                        <div class="sno_div col-2 col-sm-1   d-flex justify-content-center align-items-center">
+                            Sno.
+                        </div>
+                        <div class="name_div col-4  col-sm-4  d-flex justify-content-center align-items-center">
+                            Name
+                        </div>
+                        <div class="email_div col-6 col-sm-5 col-lg-4  d-flex justify-content-center align-items-center">
+                            Email
+                        </div>
+                        <div class="email_div d-none col-lg-1 d-lg-flex justify-content-center align-items-center">
+                            Id no
+                        </div>
+                        <div class="d-none col-sm-2  d-flex justify-content-center align-items-center  d-sm-flex">
+                            Details
+                        </div>
+                    </div>
+                </div>
+                <!-- Student data end  -->
+            </div>
+        </div>
+
+        <!-- Model  start-->
+        <div id="model">
+            <div class="div5 py-3">
+                <div class="d-flex justify-content-end mt-2 me-4 ">
+                    <span id="close" class="pointer">&times;</span>
+                </div>
+                <p class="text-center text-light fs-2 fw-bold">Add Student</p>
+                <div class="px-5 pb-5">
+                    <!-- Name  -->
+                    <p class="text-light mb-1 mt-2 ms-1">Name :</p>
+                    <div class="input_text p-2">
+                        <input type="text" placeholder="Enter Your Name" id="input_name"
+                            class="w-100 bg-transparent input ps-2">
+                    </div>
+
+                    <!-- Email  -->
+                    <p class="text-light mb-1 mt-2 ms-1">Email :</p>
+                    <div class="input_text p-2">
+                        <input type="email" placeholder="Enter Your Email" id="input_email"
+                            class="w-100 bg-transparent input ps-2">
+                    </div>
+
+                    <!-- Select Gender -->
+                    <p class="text-light mb-1 mt-2 ms-1">Gender :</p>
+                    <div class="dropdown-center">
+                        <button class="btn_color dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" id="gender_btn">
+                            Select Gender
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item gender_input" href="#">● Male</a></li>
+                            <li><a class="dropdown-item gender_input" href="#">● Female</a></li>
+                            <li><a class="dropdown-item gender_input" href="#">● Others</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Select Course  -->
+                    <p class="text-light mb-1 mt-2 ms-1">Course :</p>
+                    <div class="dropdown-center">
+                        <button class=" btn_color  dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" id="courses_btn">
+                            Select Courses
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item courses_input" href="#">● Web and App Development</a></li>
+                            <li><a class="dropdown-item courses_input" href="#">● Graphic Designing</a></li>
+                            <li><a class="dropdown-item courses_input" href="#">● AI Chat bot</a></li>
+                            <li><a class="dropdown-item courses_input" href="#">● Other</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Save Button  -->
+                    <button class="w-100 mt-4" id="add_student_save">Add Student</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Model  end-->
+
+    <!-- Model 2  -->
+<div id="div8">
+    <div class="div9 py-3">
+        <div class="d-flex justify-content-end mt-2 me-4 ">
+            <span id="close_2" class="pointer">&times;</span>
+        </div>
+        <p class="text-center text-light fs-2 fw-bold">Student details</p>
+        <div class="px-5 pb-5">
+            <!-- Name  -->
+            <p class="text-light mb-1 mt-2 ms-1">Name :</p>
+            <div class="input_text p-2">
+                <input type="text" placeholder="Enter Your Name" id="input_name_2"
+                    class="w-75 bg-transparent input ps-2">
+            </div>
+
+            <!-- Email  -->
+            <p class="text-light mb-1 mt-2 ms-1">Email :</p>
+            <div class="input_text p-2">
+                <input type="email" placeholder="Enter Your Email" id="input_email_2"
+                    class="w-75 bg-transparent input ps-2">
+            </div>
+
+            <!-- Select Gender -->
+            <p class="text-light mb-1 mt-2 ms-1">Gender :</p>
+            <div class="dropdown-center">
+                <button class="btn_color" type="button" id="gender_btn_2">
+                    Select Gender
+                </button>
+            </div>
+
+            <!-- Select Course  -->
+            <p class="text-light mb-1 mt-2 ms-1">Courses :</p>
+            <div class="dropdown-center">
+                <button class="btn_color" type="button" id="courses_btn_2">
+                    Select Gender
+                </button>
+            </div>
+
+            <!-- Save Button  -->
+            <button class="w-100 mt-4" id="add_student_save_2">Save</button>
+        </div>
+    </div>
+</div>
+</div>
+    <!-- Model 2 end -->
+
+    <!-- Bootstrap js  -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <!-- Custom script  -->
+    <script src="files/app.js"></script>
+
+    <!-- Sweet alert  -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>
