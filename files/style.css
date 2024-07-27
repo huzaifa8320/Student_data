@@ -173,8 +173,8 @@
     }
 
     .add_student {
-        width: 115px;
-        font-size: 17px;
+        width: 110px;
+        font-size: 14px;
     }
 
     .body {
@@ -194,8 +194,10 @@
         width: 100%;
         box-shadow: 0px 0px 0px black;
     }
+}
 
-    .search_student {
+@media(max-width:435px){
+    .search_student{
         width: 90px;
     }
 }

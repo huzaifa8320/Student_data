@@ -7,7 +7,7 @@ all_main.style.display = 'none'
 setTimeout(() => {
     loader_div.style.display = 'none'
     all_main.style.display = 'block'
-}, 100);
+}, 2000);
 
 // loader end 
 
@@ -147,7 +147,7 @@ add_student_save.addEventListener('click', function () {
             }
         }
         if (email_check == true) {
-        
+
             roll_number++
             let student_details = JSON.parse(localStorage.getItem('student_details')) || [];
 
@@ -175,6 +175,12 @@ add_student_save.addEventListener('click', function () {
             localStorage.setItem('student_details', JSON.stringify(student_details))
             sno()
             local()
+            input_name.value = ''
+            input_email.value = ''
+            gender_btn.innerText = 'Select Gender'
+            gender_value = ''
+            courses_btn.innerText = 'Select Courses'
+            courses_value = ''
         }
     }
 })
@@ -191,19 +197,21 @@ div3.addEventListener('click', function (e) {
         let get_Details = e.target.parentElement.parentElement.querySelector('.roll_number').innerHTML
         let input_name_2 = document.getElementById('input_name_2')
         let input_email_2 = document.getElementById('input_email_2')
+        let input_id_2 = document.getElementById('input_id_2')
         let gender_btn_2 = document.getElementById('gender_btn_2')
         let courses_btn_2 = document.getElementById('courses_btn_2')
         div8.style.display = 'flex'
         let details_click = JSON.parse(localStorage.getItem('student_details'))
-        for (let i = 0; i <  details_click.length; i++) {
+        for (let i = 0; i < details_click.length; i++) {
             if (get_Details == details_click[i].roll) {
                 input_name_2.value = `${details_click[i].name_user.slice(0, 1).toUpperCase()}${details_click[i].name_user.slice(1)}`
                 input_name_2.setAttribute('readonly', true)
                 input_email_2.value = details_click[i].email
                 input_email_2.setAttribute('readonly', true)
+                input_id_2.value = details_click[i].roll
                 gender_btn_2.innerHTML = details_click[i].gender
                 courses_btn_2.innerHTML = details_click[i].courses
-            }  
+            }
         }
     }
 })
@@ -231,12 +239,43 @@ add_student_save_2.addEventListener('click', function () {
 function local() {
     let total_student_check = JSON.parse(localStorage.getItem('student_details'))
 
+    let total_student = document.getElementById('total_student')
     if (total_student_check != null) {
-        let total_student = document.getElementById('total_student')
         let localStorage_length = JSON.parse(localStorage.getItem('student_details')).length
         total_student.innerHTML = localStorage_length
+    }
+    else {
+        total_student.innerHTML = '0'
     }
 }
 local()
 
 // Total Student showing end
+
+
+// Delete all student function 
+
+function delete_all() {
+    let remove_all = document.querySelectorAll('.div7')
+    if (remove_all.length == 0) {
+        Swal.fire("You not have any Student 📝");
+    }
+    else {
+        Swal.fire({
+            title: "Do you want to delete all Student Data 📝",
+            showDenyButton: true,
+            confirmButtonText: "Yes",
+            denyButtonText: `No`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                for (let i = 0; i < remove_all.length; i++) {
+                    remove_all[i].remove()
+                }
+                localStorage.removeItem('student_details')
+                local()
+            }
+        });
+    }
+}
+
+// Delete all student function end
