@@ -7,7 +7,7 @@ all_main.style.display = 'none'
 setTimeout(() => {
     loader_div.style.display = 'none'
     all_main.style.display = 'block'
-}, 2000);
+}, 100);
 
 // loader end 
 
@@ -50,12 +50,11 @@ let localStorage_geting = JSON.parse(localStorage.getItem('student_details'))
 if (localStorage_geting != null) {
     for (let i = 0; i < localStorage_geting.length; i++) {
         roll_number++
-        let change_email = localStorage_geting[i].email.length > 18 ? localStorage_geting[i].email.slice(0, 15) + '...' : localStorage_geting[i].email;
         div3.innerHTML += `
              <div class="mx-1 div7  row my-3">
                  <div class="sno_div col-2 col-sm-1 d-flex justify-content-center align-items-center"></div>
-                 <div class="name_div col-4 col-sm-4 d-flex justify-content-center align-items-center">${localStorage_geting[i].name_user.slice(0, 1).toUpperCase()}${localStorage_geting[i].name_user.slice(1)}</div>
-                 <div class="email_div col-6 col-sm-5 col-lg-4 d-flex justify-content-center align-items-center">${change_email}</div>
+                 <div class="name_div col-4 col-sm-4 d-flex justify-content-center align-items-center">${localStorage_geting[i].name_user}</div>
+                 <div class="email_div col-6 col-sm-5 col-lg-4 d-flex justify-content-center align-items-center">${localStorage_geting[i].email}</div>
                  <div class="roll_number d-none col-lg-1 d-lg-flex justify-content-center align-items-center">${localStorage_geting[i].roll}</div>
                  <div class="details_div col-sm-2 d-flex justify-content-center align-items-center d-none d-sm-flex p-0"><button class='details_btn'>Details</button></div>                    
                  <div class="details_div col-sm-2 d-flex justify-content-center align-items-center d-flex d-sm-none p-0"><button class='details_btn mt-3'>Details</button></div>                    
@@ -63,6 +62,7 @@ if (localStorage_geting != null) {
              `
     }
     sno()
+    capitalize()
 }
 
 // localStorage item showing end 
@@ -158,14 +158,13 @@ add_student_save.addEventListener('click', function () {
                 courses: courses_value.slice(2),
                 roll: roll_number
             }
-            let convert_email = input_email.value.length > 18 ? input_email.value.slice(0, 15) + '...' : input_email.value;
             model.style.display = 'none'
 
             div3.innerHTML += `
                  <div class="mx-1 div7  row my-3">
                  <div class="sno_div col-2 col-sm-1 d-flex justify-content-center align-items-center"></div>
-                 <div class="name_div col-4 col-sm-4 d-flex justify-content-center align-items-center">${input_name.value.slice(0, 1).toUpperCase()}${input_name.value.slice(1)}</div>
-                 <div class="email_div col-6 col-sm-5 col-lg-4 d-flex justify-content-center align-items-center">${convert_email}</div>
+                 <div class="name_div col-4 col-sm-4 d-flex justify-content-center align-items-center">${input_name.value}</div>
+                 <div class="email_div col-6 col-sm-5 col-lg-4 d-flex justify-content-center align-items-center">${input_email.value}</div>
                  <div class="roll_number d-none col-lg-1 d-lg-flex justify-content-center align-items-center">${roll_number}</div>
                  <div class="details_div col-sm-2 d-flex justify-content-center align-items-center d-none d-sm-flex p-0"><button class='details_btn'>Details</button></div>                    
                  <div class="details_div col-sm-2 d-flex justify-content-center align-items-center d-flex d-sm-none p-0"><button class='details_btn mt-3'>Details</button></div>                    
@@ -183,6 +182,7 @@ add_student_save.addEventListener('click', function () {
             courses_value = ''
         }
     }
+    capitalize()
 })
 
 //Click Save data of student end
@@ -192,14 +192,14 @@ add_student_save.addEventListener('click', function () {
 let div8 = document.getElementById('div8')
 div8.style.display = 'none'
 
+let input_name_2 = document.getElementById('input_name_2')
+let input_email_2 = document.getElementById('input_email_2')
+let input_id_2 = document.getElementById('input_id_2')
+let gender_btn_2 = document.getElementById('gender_btn_2')
+let courses_btn_2 = document.getElementById('courses_btn_2')
 div3.addEventListener('click', function (e) {
     if (e.target.classList.contains('details_btn')) {
         let get_Details = e.target.parentElement.parentElement.querySelector('.roll_number').innerHTML
-        let input_name_2 = document.getElementById('input_name_2')
-        let input_email_2 = document.getElementById('input_email_2')
-        let input_id_2 = document.getElementById('input_id_2')
-        let gender_btn_2 = document.getElementById('gender_btn_2')
-        let courses_btn_2 = document.getElementById('courses_btn_2')
         div8.style.display = 'flex'
         let details_click = JSON.parse(localStorage.getItem('student_details'))
         for (let i = 0; i < details_click.length; i++) {
@@ -208,6 +208,7 @@ div3.addEventListener('click', function (e) {
                 input_name_2.setAttribute('readonly', true)
                 input_email_2.value = details_click[i].email
                 input_email_2.setAttribute('readonly', true)
+                input_id_2.setAttribute('readonly', true)
                 input_id_2.value = details_click[i].roll
                 gender_btn_2.innerHTML = details_click[i].gender
                 courses_btn_2.innerHTML = details_click[i].courses
@@ -225,11 +226,6 @@ window.addEventListener('click', function (e) {
     if (e.target.id == 'div8') {
         div8.style.display = 'none'
     }
-})
-
-let add_student_save_2 = document.getElementById('add_student_save_2')
-add_student_save_2.addEventListener('click', function () {
-    Swal.fire("Website in Maintenance 🛠️");
 })
 
 // Show Details Function end
@@ -279,3 +275,71 @@ function delete_all() {
 }
 
 // Delete all student function end
+
+// Edit student function start
+
+let edit_button = document.getElementsByClassName('edit_button')
+for (const i of edit_button) {
+    i.addEventListener('click', function (e) {
+        e.target.previousElementSibling.removeAttribute('readonly');
+        e.target.previousElementSibling.focus();
+    })
+}
+
+
+let add_student_save_2 = document.getElementById('add_student_save_2')
+add_student_save_2.addEventListener('click', function () {
+    let checking = true
+    let edit_details = JSON.parse(localStorage.getItem('student_details'))
+    for (let i = 0; i < edit_details.length; i++) {
+        if (input_email_2.value == edit_details[i].email) {
+            Swal.fire("This email is already in use 📝");
+            console.log('already');
+            checking = false
+        }
+        else {
+            checking == true
+        }
+    }
+    if (checking == true) {
+        for (let i = 0; i < edit_details.length; i++) {
+            if (input_id_2.value == edit_details[i].roll) {
+                const edited = {
+                    name_user: input_name_2.value,
+                    email: input_email_2.value,
+                    gender: gender_btn_2.innerText,
+                    courses: courses_btn_2.innerText,
+                    roll: input_id_2.value,
+                }
+                edit_details[i] = edited
+                localStorage.setItem('student_details', JSON.stringify(edit_details))
+            }
+        }
+        for (let i = 0; i < div7.length; i++) {
+            let div_save = div7[i].getElementsByClassName('roll_number')[0].innerHTML;
+            if (input_id_2.value == div_save) {
+                let div_find = div7[i]
+                div_find.querySelector('.name_div').innerHTML = input_name_2.value
+                div_find.querySelector('.email_div').innerHTML = input_email_2.value
+            }
+            capitalize()
+        }
+        div8.style.display = 'none'
+    }
+
+    
+})
+
+function capitalize() {
+    for (let i = 0; i < div7.length; i++) {
+        let name_data = div7[i].querySelector('.name_div').innerHTML
+        div7[i].querySelector('.name_div').innerHTML = `${name_data.slice(0, 1).toLocaleUpperCase()}${name_data.slice(1)}`
+        let email_data = div7[i].querySelector('.email_div').innerHTML
+        if (email_data.length > 18) {
+            email_data = `${email_data.slice(0,15)}...`;
+        }
+        div7[i].querySelector('.email_div').innerHTML = email_data
+    }
+}
+
+// Edit student function end
